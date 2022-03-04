@@ -12,5 +12,6 @@ USER root
 ENV USER=root
 
 RUN echo "hello world"
+ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 
