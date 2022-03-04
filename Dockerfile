@@ -1,23 +1,16 @@
-# Dockerfile from here: https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
 
-FROM node:10-alpine
+FROM docker.intuit.com/oicp/standard/base/debian9:latest
+ARG build
+LABEL build=${build}
 
-# Create app directory
-WORKDIR /myapp
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are
-# copied where available (npm@5+)
-COPY package*.json ./
-# COPY package.json ./
+ARG DOCKER_TAGS=latest
+ARG DOCKER_IMAGE_NAME=docker.artifactory.a.intuit.com//dev/deploy/cd/argocd-utils:${DOCKER_TAGS}
+ARG SERVICE_LINK=https://devportal.intuit.com/app/dp/resource/000000000000
 
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+USER root
+ENV USER=root
 
-# Bundle app source
-COPY . .
+RUN echo "hello world"
 
-EXPOSE 3000
-CMD ["node", "app.js"]
+
